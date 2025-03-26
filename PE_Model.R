@@ -9,23 +9,24 @@ library(readr)
 bee_dde <- function(t, y, parms){
   
   #Brood break implementation
- 
- # if (t < 50){
- # L = 2000
- # } else if (t< 70){
- #   L = 0
- #  } else{
- #   L = 2000
- #  }
- L = 2000
+  #Either run this if statement, or assign L to 2000
+  # if (t < 50){
+  #   L = 2000
+  # } else if (t< 70){
+  #   L = 0
+  # } else{
+    L = 2000
+  # }
+  # 
   
-# if (t < 60){
-# sr = parms[1]
-#  } else{
-#    sr = parms[2]
-#  }
-sr = parms[1]
+  # if (t < 60){
+  #    sr = parms[1]
+  #  } else{
+  #    sr = parms[2]
+  #  }
   
+  sr = parms[1]
+  #L = 2000
   alphamin = 0.25
   sigma = 0.75
   v = 5000
@@ -33,13 +34,15 @@ sr = parms[1]
   phi = 1/9
   gammaA = 0.007
   gammaB = 0.018
+  #cf is a feeding parameter
+  cf = 0
   ct = 0.033
   b = 500
   a0 = 5
-  cf = 60
+  #sr = parms[1]
   mr = ((15*sr^2) + 1)
   delay = 12
-  
+  # 
   y1 = y[[1L]]
   y2 = y[[2L]]
   y3 = y[[3L]]
@@ -82,8 +85,9 @@ sr = parms[1]
 }
 
 
+
 #Label timesteps for simulation to run over
-tt = seq(0,200)
+tt = seq(0,150)
 
 #Label initial values for model
 y0 = c(y1 = 1000, y2 = 0, y3 = 16000, y4 = 8000)
@@ -98,9 +102,9 @@ system.time(yout <- dede(y = y0, times = tt, func = bee_dde,
 
 #Plot output
 matplot(yout[,1], yout[,-1], type = "l", lwd = 2, lty = 1,
-        main = "Chlorothalonil", xlab = "Days",
+        main = "MR 1.234375", xlab = "Days",
         ylab = "Stored food (g) or number of bees",
-        ylim = c(0,10000))
+        ylim = c(0,25000))
 
 #Prepare data to plot as a dataframe in ggplot
 colnames(yout) = c("time","food", "brood", "hive", "foragers")
