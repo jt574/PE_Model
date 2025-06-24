@@ -3,3 +3,5 @@
 
 PEModel.R is associated R code for creating plots seen in the submission.
 
+PE_Model_markdown.Rmd is a code walkthrough of creating figures from the paper, and the associated pdf is a rendered version including figures.
+
